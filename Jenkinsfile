@@ -1,8 +1,5 @@
 pipeline {
     agent any 
-	options { 
-		disableConcurrentBuilds() 
-	}
     stages {
         stage('install-pip-deps') { 
             steps {
@@ -18,6 +15,9 @@ pipeline {
         stage('deploy-to-dev') { 
             steps {
                 echo 'Deploying to dev'
+				script {
+					deploy("DEV",7001)
+				}
             }
         }
         stage('tests-on-dev') { 
@@ -57,3 +57,13 @@ pipeline {
         }
     }
 }
+
+def deploy(String env, int port){
+	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
+	bat "pm2 delete greetings-app-${env} & set "errorlevel=0""
+	bat "pm2 start -n greetings-app-${env} index.js -- -- ${port}"
+	
+}
+
+
+
