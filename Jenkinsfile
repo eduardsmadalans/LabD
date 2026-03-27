@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Deploying to dev'
 				script {
-					deploy("DEV",7001)
+					deploy("dev",7001)
 				}
             }
         }
@@ -28,6 +28,9 @@ pipeline {
 		stage('deploy-to-stg') { 
             steps {
                 echo 'deploying to stage' 
+				script {
+					deploy("stg",7002)
+				}
             }
         }
 		stage('tests-on-stg') { 
@@ -38,6 +41,9 @@ pipeline {
 		stage('deploy-to-preprod') { 
             steps {
                 echo 'deploying to pre-production'
+				script {
+					deploy("preprod",7003)
+				}
             }
         }
 		stage('tests-on-preprod') { 
@@ -48,6 +54,9 @@ pipeline {
 		stage('deploy-to-prod') { 	
             steps {
                 echo 'deploying to pre-production'
+				script {
+					deploy("prod",7004)
+				}
             }
         }
 		stage('tests-on-prod') { 
