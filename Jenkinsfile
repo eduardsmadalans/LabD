@@ -60,7 +60,7 @@ pipeline {
 
 def deploy(String env, int port){
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
-	bat "npm install pm2"
+	bat "npm install -g pm2"
 	bat "pm2 delete greetings-app-${env} & EXIT /B 0"
 	bat "pm2 start -n greetings-app-${env} app.py -- -- ${port}"
 	
