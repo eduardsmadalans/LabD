@@ -1,9 +1,18 @@
 pipeline {
     agent any 
+	options { 
+		disableConcurrentBuilds() 
+	}
     stages {
         stage('install-pip-deps') { 
             steps {
                 echo 'Installing dependencies'
+				git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
+				powershell 'ls'
+				powershell '''
+				python3 -m venv venv
+				.\\venv\\bin\\Activate.ps1
+				pip install -r requirements.txt'''
             }
         }
         stage('deploy-to-dev') { 
