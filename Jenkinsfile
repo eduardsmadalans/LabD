@@ -22,7 +22,10 @@ pipeline {
         }
         stage('tests-on-dev') { 
             steps {
-                echo 'testing on dev' 
+                echo 'testing on dev'
+				script {
+					test("dev")
+				}
             }
         }
 		stage('deploy-to-stg') { 
@@ -36,6 +39,9 @@ pipeline {
 		stage('tests-on-stg') { 
             steps {
                 echo 'testing on stage' 
+				script {
+					test("stg")
+				}
             }
         }
 		stage('deploy-to-preprod') { 
@@ -49,6 +55,9 @@ pipeline {
 		stage('tests-on-preprod') { 
             steps {
                 echo 'testing on pre-production' 
+				script {
+					test("preprod")
+				}
             }
         }
 		stage('deploy-to-prod') { 	
@@ -62,6 +71,9 @@ pipeline {
 		stage('tests-on-prod') { 
             steps {
                 echo 'testing on production'
+				script {
+					test("prod")
+				}
             }
         }
     }
@@ -74,6 +86,13 @@ def deploy(String env, int port){
 	    pm2 start -n greetings-app-${env} app.py -- -- ${port}
 		pm2 list'''
 }
+
+def test(String env){ 
+	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework'
+	bat "npm install"
+	bat "npm run greetings greetings_${env}"
+}
+
 
 
 
