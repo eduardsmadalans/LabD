@@ -45,7 +45,7 @@ pipeline {
                 echo 'testing on pre-production' 
             }
         }
-		stage('deploy-to-prod') { 
+		stage('deploy-to-prod') { 	
             steps {
                 echo 'deploying to pre-production'
             }
@@ -64,7 +64,6 @@ def deploy(String env, int port){
 	    pm2 delete greetings-app-${env} & EXIT /B 0
 	    pm2 start -n greetings-app-${env} app.py -- -- ${port}
 		pm2 list'''
-	
 }
 
 
