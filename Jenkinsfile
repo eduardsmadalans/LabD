@@ -87,7 +87,8 @@ def deploy(String env, int port){
 def test(String env){ 
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework'
 	bat '''npm install
-	npm run greetings greetings_${env}'''
+	npm run greetings greetings_${env}
+	pm2 list'''
 }
 
 
