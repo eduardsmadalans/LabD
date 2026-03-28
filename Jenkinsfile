@@ -79,9 +79,9 @@ pipeline {
 
 def deploy(String env, int port){
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
-	bat "npm install -g pm2"
-	bat "pm2 delete greetings-app-${env} & EXIT /B 0"
-	bat "pm2 start app.py -n greetings-app-${env} --interpreter .\\venv\\bin\\python -- -- ${port}"
+	bat "npm install pm2"
+	bat "node_modules\.bin\pm2 delete greetings-app-${env} & EXIT /B 0"
+	bat "node_modules\.bin\pm2 start app.py -n greetings-app-${env} --interpreter .\\venv\\bin\\python -- -- ${port}"
 }
 
 def test(String env){ 
@@ -89,7 +89,7 @@ def test(String env){
 	bat '''npm install
 	npm run greetings greetings_${env}
 	'''
-	bat "pm2 list"
+	bat "node_modules\.bin\pm2 list"
 }
 
 
