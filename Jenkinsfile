@@ -90,7 +90,7 @@ def test(String env){
 	bat '''npm install
 	npm run greetings greetings_${env}
 	'''
-	bat ".\\node_modules\\.bin\\pm2 list"
+	//bat ".\\node_modules\\.bin\\pm2 list"
 }
 
 
