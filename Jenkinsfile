@@ -6,7 +6,7 @@ pipeline {
                 echo 'Installing dependencies'
 				git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
 				powershell "ls"
-				powershell "python3 -m venv venv"
+				powershell "python -m venv venv"
 				powershell ".\\venv\\Scripts\\python.exe -m pip install -r requirements.txt"
             }
         }
