@@ -7,7 +7,7 @@ pipeline {
 				git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
 				powershell "ls"
 				powershell "python3 -m venv venv"
-				powershell "venv/bin/python python3 -m pip install -r requirements.txt"
+				powershell ".venv\\bin\\python pip install -r requirements.txt"
             }
         }
         stage('deploy-to-dev') { 
