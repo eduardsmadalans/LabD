@@ -80,8 +80,9 @@ pipeline {
 def deploy(String env, int port){
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
 	powershell "npm install pm2"
-	bat "node_modules/.bin/pm2 delete greetings-app-${env} & EXIT /B 0"
-	powershell "node_modules/.bin/pm2 start app.py -n greetings-app-${env} .\\venv\\Scripts\\python.exe -- -- ${port}"
+	bat "node_modules\.bin\pm2 delete greetings-app-${env} & EXIT /B 0"
+	powershell "node_modules\.bin\pm2 start app.py -n greetings-app-${env} -- -- ${port}"
+	//.\\venv\\Scripts\\python.exe
 }
 
 def test(String env){ 
