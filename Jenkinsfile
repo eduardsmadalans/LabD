@@ -7,7 +7,7 @@ pipeline {
 				git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
 				powershell "ls"
 				powershell "python3 -m venv venv"
-				powershell "./venv/Scripts/python.exe -m pip install -r requirements.txt"
+				powershell & ".\venv\Scripts\python.exe -m pip install -r requirements.txt"
             }
         }
         stage('deploy-to-dev') { 
@@ -81,7 +81,7 @@ def deploy(String env, int port){
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
 	powershell "npm install pm2"
 	bat "node_modules/.bin/pm2 delete greetings-app-${env} & EXIT /B 0"
-	powershell "node_modules/.bin/pm2 start app.py -n greetings-app-${env} --interpreter ./venv/Scripts/python.exe -- -- ${port}"
+	powershell "node_modules/.bin/pm2 start app.py -n greetings-app-${env} --interpreter & .\venv\Scripts\python.exe -- -- ${port}"
 }
 
 def test(String env){ 
