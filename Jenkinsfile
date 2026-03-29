@@ -7,7 +7,7 @@ pipeline {
 				git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
 				bat "dir"
 				bat "python -m venv venv"
-				bat '"".\venv\Scripts\python.exe" -m pip install -r requirements.txt"'
+				bat '"".\\venv\\Scripts\\python.exe" -m pip install -r requirements.txt"'
             }
         }
         stage('deploy-to-dev') { 
