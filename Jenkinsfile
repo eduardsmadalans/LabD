@@ -90,7 +90,7 @@ def test(String env){
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework'
 	bat "npm install"
 	bat "dir"
-	bat "npm run tests\\scenarios\\greetings \"greetings_${env}\""
+	powershell "npm run .\\tests\\scenarios\\greetings "greetings_${env}"
 
 	
 }
