@@ -5,9 +5,9 @@ pipeline {
             steps {
                 echo 'Installing dependencies'
 				git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
-				powershell "ls"
-				powershell "python -m venv venv"
-				powershell ".\\venv\\Scripts\\python.exe -m pip install -r requirements.txt"
+				bat "dir"
+				bat "python -m venv venv"
+				bat ".\\venv\\Scripts\\python.exe -m pip install -r requirements.txt"
             }
         }
         stage('deploy-to-dev') { 
@@ -79,16 +79,18 @@ pipeline {
 
 def deploy(String env, int port){
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
-	powershell "npm install pm2"
+	bat "dir"
+	bat "npm install pm2"
 	bat ".\\node_modules\\.bin\\pm2 delete greetings-app-${env} & EXIT /B 0"
-	powershell ".\\node_modules\\.bin\\pm2 start app.py -n greetings-app-${env} -- -- ${port}"
-	//.\\venv\\Scripts\\python.exe
+	bat ".\\node_modules\\.bin\\pm2 start app.py -n greetings-app-${env} --interpreter .\\venv\\Scripts\\python.exe -- -- ${port}"
+		
 }
 
 def test(String env){ 
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/course-js-api-framework'
-	powershell "npm install"
-	powershell "npm run greetings greetings_${env}"
+	bat "dir"
+	bat "npm install"
+	bat "npm run greetings greetings_${env}"
 
 	
 }
