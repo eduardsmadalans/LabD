@@ -83,7 +83,7 @@ def deploy(String env, int port){
 	bat "dir"
 	//bat ".\\node_modules\\.bin\\
 	bat pm2 delete greetings-app-${env} & EXIT /B 0"
-	//".\\node_modules\\.bin\\
+	// ".\\node_modules\\.bin\\
 	bat pm2 start app.py --name greetings-app-${env} -- -- ${port}"
 		
 }
