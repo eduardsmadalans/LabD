@@ -82,7 +82,7 @@ def deploy(String env, int port){
 	bat "dir"
 	
 	bat "node_modules\\.bin\\pm2 delete greetings-app-${env} & EXIT /B 0"
-	powershell "node_modules\\.bin\\pm2 start app.py --name greetings-app-${env} -- -- ${port}"
+	powershell ".node_modules\\.bin\\pm2 start app.py --name greetings-app-${env} -- -- ${port}"
 		
 }
 
