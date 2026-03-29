@@ -6,8 +6,8 @@ pipeline {
                 echo 'Installing dependencies'
 				git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
 				sh "ls"
-				sh "python -m venv venv"
-				sh "./venv/Scripts/python.exe -m pip install -r requirements.txt"
+				sh "python3 -m venv venv"
+				sh "./venv/bin/python -m pip install -r requirements.txt"
             }
         }
         stage('deploy-to-dev') { 
@@ -79,11 +79,8 @@ pipeline {
 
 def deploy(String env, int port){
 	git branch: 'main', poll: false, url: 'https://github.com/mtararujs/python-greetings'
-	//bat "npm install pm2
 	sh "ls"
-	//bat ".\\node_modules\\.bin\\
-	sh "pm2 delete greetings-app-${env} || 0"
-	// ".\\node_modules\\.bin\\
+	sh "pm2 delete greetings-app-${env} || true"
 	sh "pm2 start app.py --name greetings-app-${env} -- ${port}"
 		
 }
@@ -93,7 +90,6 @@ def test(String env){
 	sh "npm install"
 	sh "ls"
 	sh "npm run greetings greetings_${env}"
-
 	
 }
 
